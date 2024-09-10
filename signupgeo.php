@@ -63,12 +63,8 @@ if(isset($_POST['username'], $_POST['email'], $_POST['password'], $_POST['crmpas
         body {
             margin: 0;
             height: 100vh;
-            background-image: radial-gradient(circle at 44% 67%, hsla(75, 0%, 92%, 0.1) 0%, hsla(75, 0%, 92%, 0.1) 30%, transparent 30%, transparent 34%, transparent 34%, transparent 100%),
-                            radial-gradient(circle at 33% 92%, hsla(75, 0%, 92%, 0.1) 0%, hsla(75, 0%, 92%, 0.1) 16%, transparent 16%, transparent 53%, transparent 53%, transparent 100%),
-                            radial-gradient(circle at 0% 46%, hsla(75, 0%, 92%, 0.1) 0%, hsla(75, 0%, 92%, 0.1) 42%, transparent 42%, transparent 61%, transparent 61%, transparent 100%),
-                            radial-gradient(circle at 47% 44%, hsla(75, 0%, 92%, 0.1) 0%, hsla(75, 0%, 92%, 0.1) 96%, transparent 96%, transparent 97%, transparent 97%, transparent 100%),
-                            radial-gradient(circle at 34% 28%, hsla(75, 0%, 92%, 0.1) 0%, hsla(75, 0%, 92%, 0.1) 26%, transparent 26%, transparent 85%, transparent 85%, transparent 100%),
-                            linear-gradient(135deg, rgb(48, 2, 209), rgb(100, 28, 120));
+            background-image: linear-gradient(340deg, rgba(76, 76, 76,0.02) 0%, rgba(76, 76, 76,0.02) 34%,transparent 34%, transparent 67%,rgba(142, 142, 142,0.02) 67%, rgba(142, 142, 142,0.02) 73%,rgba(151, 151, 151,0.02) 73%, rgba(151, 151, 151,0.02) 100%),linear-gradient(320deg, rgba(145, 145, 145,0.02) 0%, rgba(145, 145, 145,0.02) 10%,transparent 10%, transparent 72%,rgba(35, 35, 35,0.02) 72%, rgba(35, 35, 35,0.02) 76%,rgba(69, 69, 69,0.02) 76%, rgba(69, 69, 69,0.02) 100%),linear-gradient(268deg, rgba(128, 128, 128,0.02) 0%, rgba(128, 128, 128,0.02) 5%,transparent 5%, transparent 76%,rgba(78, 78, 78,0.02) 76%, rgba(78, 78, 78,0.02) 83%,rgba(224, 224, 224,0.02) 83%, rgba(224, 224, 224,0.02) 100%),linear-gradient(198deg, rgba(25, 25, 25,0.02) 0%, rgba(25, 25, 25,0.02) 36%,transparent 36%, transparent 85%,rgba(180, 180, 180,0.02) 85%, rgba(180, 180, 180,0.02) 99%,rgba(123, 123, 123,0.02) 99%, rgba(123, 123, 123,0.02) 100%),linear-gradient(90deg, rgb(255,255,255),rgb(255,255,255));
+
             background-repeat: no-repeat;
             background-size: cover;
         }
@@ -78,8 +74,8 @@ if(isset($_POST['username'], $_POST['email'], $_POST['password'], $_POST['crmpas
             padding: 30px;
             background-color: #f8f9fa;
             border-radius: 8px;
-            background-color: #f5f5f5;
-            color: #f5f5f5;
+            background-color: #111;
+            color: #111;
             font-family: Helvetica;
             border-radius: 8px;
             box-shadow:inset 0px 0px 10px rgba(0, 0, 0, 0.086);
@@ -201,7 +197,7 @@ if(isset($_POST['username'], $_POST['email'], $_POST['password'], $_POST['crmpas
                 return false
             }
             else {
-                alert("Registered successfull")
+                // alert("Registered successfull")
                 return true
             }
         }

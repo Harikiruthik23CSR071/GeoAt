@@ -18,7 +18,7 @@ session_start();
     <nav class="navbar">
         <img src="Group 34056.png" alt="Logo">
         <ul>
-            <li><a href="#">About</a></li>
+            <li><a href="#">About Us</a></li>
             <li><a href="#">Services</a></li>
             <li><a href="#">Contact Us</a></li>
             <li><a href="#">News</a></li>

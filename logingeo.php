@@ -30,7 +30,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['username'] = $username;
         $_SESSION['email'] = $user['email'];
         $_SESSION['session_start_time'] = date("Y-m-d H:i:s");
-        header("Location: index.php");
+        echo "<script>alert('Login Successfull');
+        window.location.href='index.php';
+        </script>";
         exit();
     } else {
         // Check if username exists
@@ -163,7 +165,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 return false
             }
             else {
-                alert("Login Successful")
+                // alert("Login Successful")
                 return true
             }
         }

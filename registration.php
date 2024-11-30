@@ -29,8 +29,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if ($result->num_rows == 1) {
             $user = $result->fetch_assoc();
-            // Verify password hash
-            if (password_verify($password, $user['password'])) {
+            // Verify plain text password
+            if ($password === $user['password']) {
                 $_SESSION['username'] = $username;
                 $_SESSION['email'] = $user['email'];
                 $_SESSION['session_start_time'] = date("Y-m-d H:i:s");
@@ -64,13 +64,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($result->num_rows > 0) {
                 echo "<script>alert('Username already exists');</script>";
             } else {
-                // Hash the password
-                $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-                $stmt = $conn->prepare("INSERT INTO geoloc (username, email, password) VALUES (?, ?, ?)");
-                $stmt->bind_param("sss", $username, $email, $hashedPassword);
+                // Insert the plain text password into the database
+                $stmt = $conn->prepare("INSERT INTO geoloc (username, email, password, crmpassword) VALUES (?, ?, ?, ?)");
+                $stmt->bind_param("ssss", $username, $email, $password, $confirmPassword);
                 if ($stmt->execute()) {
                     echo "<script>alert('Registration Successful');
-                    window.location.href='index.php';
+                    window.location.href='registration.php';
                     </script>";
                 } else {
                     echo "<script>alert('Error during registration');</script>";
@@ -80,6 +79,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 

@@ -173,6 +173,17 @@ if (isset($_GET['input_date']) && isset($_GET['start_time']) && isset($_GET['end
       <li class="">
         <i class="uil-folder"></i><a href="#">Coordinates Locker</a>
       </li>
+      <li class="">
+        <i class="uil-folder"></i><a href="statisticalMapping.php">Statistics</a>
+      </li>
+      <li class="">
+        <i class="uil-folder"></i><a href="statisticalMapping.html">Users</a>
+      </li> 
+      <li class="">
+        <i class="uil-folder"></i><a href="lstm.php">Get Insights</a>
+      </li> <li class="">
+        <i class="uil-folder"></i><a href="statisticalMapping.html">Settings</a>
+      </li>
     </ul>
   </aside>
   

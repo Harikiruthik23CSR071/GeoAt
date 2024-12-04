@@ -158,17 +158,17 @@ if ($avgSessionResult && $avgSessionResult->num_rows > 0) {
           </div>
         </div>
         <center><h5 class="mt-3">Admin</h5></center>
-        <p>_______________________________</p>
+        <p>____________________________</p>
         <ul>
           <li><a href="Admin.php"><i class="uil uil-dashboard"></i> Dashboard</a></li>
-          <li><a href="#"><i class="uil uil-map-marker"></i> Coordinates Locker</a></li>
-          <li><a href="#"><i class="uil uil-chart"></i> Statistics</a></li>
+          <li><a href="setcoordinates.php"><i class="uil uil-map-marker"></i> Set Coordinates</a></li>
+          <li><a href="editcoordinates.php"><i class="uil uil-map-marker"></i>Edit Coordinates</a></li>
+          <li><a href="statisticalMapping.php"><i class="uil uil-chart"></i> Statistics</a></li>
           <li><a href="#"><i class="uil uil-users-alt"></i> Users</a></li>
           <li><a href="lstm.php"><i class="uil uil-setting"></i> Get Insights</a></li>
           <li><a href="registration.php"><i class="uil uil-signout"></i> Logout</a></li>
         </ul>
       </nav>
-      
       <!-- Main Content -->
       <main class="col-md-10 ms-sm-auto px-md-4">
         <h1 class="mt-4">Statistics Dashboard</h1>

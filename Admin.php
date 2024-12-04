@@ -171,7 +171,10 @@ if (isset($_GET['input_date']) && isset($_GET['start_time']) && isset($_GET['end
         <i class="uil-estate fa-fw"></i><a href="#"> Dashboard</a>
       </li>
       <li class="">
-        <i class="uil-folder"></i><a href="#">Coordinates Locker</a>
+        <i class="uil-folder"></i><a href="setcoordinates.php">Set Coordinates</a>
+      </li>
+      <li class="">
+        <i class="uil-folder"></i><a href="editcoordinates.php">Edit Coordinates</a>
       </li>
       <li class="">
         <i class="uil-folder"></i><a href="statisticalMapping.php">Statistics</a>

@@ -168,21 +168,25 @@ $trainedWeights = ($modelResult->num_rows > 0) ? unserialize($modelResult->fetch
 <div class="container-fluid">
     <div class="row">
         <!-- Sidebar -->
-        <nav class="col-md-2 sidebar">
-            <div class="text-center">
-                <img src="Group 34056.png" alt="Admin" width="65">
-                <h2>GeoAt</h2>
-            </div>
-            <ul>
-                <li><a href="Admin.php">Dashboard</a></li>
-                <li><a href="#">Coordinates Locker</a></li>
-                <li><a href="statisticalMapping.php">Statistics</a></li>
-                <li><a href="#">Users</a></li>
-                <li><a href="lstm.php">Get Insights</a></li>
-                <li><a href="registration.php">Logout</a></li>
-            </ul>
-        </nav>
-
+        <nav class="col-md-2 d-none d-md-block sidebar">
+        <div class="sidebar-header">
+          <div style="display: flex; align-items: center;">
+            <img src="Group 34056.png" alt="Admin" width="65">
+            <h2 style="margin: 0 0 0 15px;">eoAt</h2>
+          </div>
+        </div>
+        <center><h5 class="mt-3">Admin</h5></center>
+        <p>____________________________</p>
+        <ul>
+          <li><a href="Admin.php"><i class="uil uil-dashboard"></i> Dashboard</a></li>
+          <li><a href="setcoordinates.php"><i class="uil uil-map-marker"></i> Set Coordinates</a></li>
+          <li><a href="editcoordinates.php"><i class="uil uil-map-marker"></i>Edit Coordinates</a></li>
+          <li><a href="statisticalMapping.php"><i class="uil uil-chart"></i> Statistics</a></li>
+          <li><a href="#"><i class="uil uil-users-alt"></i> Users</a></li>
+          <li><a href="lstm.php"><i class="uil uil-setting"></i> Get Insights</a></li>
+          <li><a href="registration.php"><i class="uil uil-signout"></i> Logout</a></li>
+        </ul>
+      </nav>
         <!-- Main Content -->
         <main class="col-md-10 ms-sm-auto px-md-4">
     <h1 class="mt-4">Model Insights</h1>

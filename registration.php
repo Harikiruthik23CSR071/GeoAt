@@ -225,8 +225,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
         <!-- Left Section -->
         <div class="left-section">
-            <img src="Group 24.png" alt="Illustration">
-            <h1>GeoLoc</h1>
+            <img src="Group 34056.png" alt="Illustration">
+            <h1>GeoAt</h1>
             <p>Elevating productivity and collaboration with innovative geolocation-based attendance solutions.</p>
         </div>
 

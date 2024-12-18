@@ -1,4 +1,3 @@
-
 <?php
 session_start();
 
@@ -56,24 +55,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $bottomRightLon = $_POST['bottom_right_lon'];
 
         if (is_numeric($topLeftLat) && is_numeric($topLeftLon) && is_numeric($bottomRightLat) && is_numeric($bottomRightLon)) {
-            // Check if coordinates exist
-            $checkQuery = "SELECT id FROM coordinates WHERE user_id = ?";
-            $stmt = $conn->prepare($checkQuery);
+            // Step 1: Delete existing coordinates for the specific user
+            $deleteQuery = "DELETE FROM coordinates WHERE user_id = ?";
+            $stmt = $conn->prepare($deleteQuery);
             $stmt->bind_param("i", $userId);
             $stmt->execute();
-            $checkResult = $stmt->get_result();
 
-            if ($checkResult->num_rows > 0) {
-                // Update existing coordinates
-                $updateQuery = "UPDATE coordinates SET top_left_lat = ?, top_left_lon = ?, bottom_right_lat = ?, bottom_right_lon = ? WHERE user_id = ?";
-                $stmt = $conn->prepare($updateQuery);
-                $stmt->bind_param("dddii", $topLeftLat, $topLeftLon, $bottomRightLat, $bottomRightLon, $userId);
-            } else {
-                // Insert new coordinates
-                $insertQuery = "INSERT INTO coordinates (user_id, top_left_lat, top_left_lon, bottom_right_lat, bottom_right_lon) VALUES (?, ?, ?, ?, ?)";
-                $stmt = $conn->prepare($insertQuery);
-                $stmt->bind_param("idddd", $userId, $topLeftLat, $topLeftLon, $bottomRightLat, $bottomRightLon);
-            }
+            // Step 2: Insert or update new coordinates
+            $insertQuery = "INSERT INTO coordinates (user_id, top_left_lat, top_left_lon, bottom_right_lat, bottom_right_lon)
+                            VALUES (?, ?, ?, ?, ?)";
+            $stmt = $conn->prepare($insertQuery);
+            $stmt->bind_param("idddd", $userId, $topLeftLat, $topLeftLon, $bottomRightLat, $bottomRightLon);
 
             if ($stmt->execute()) {
                 $successMessage = "Coordinates updated successfully!";
@@ -86,6 +78,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">

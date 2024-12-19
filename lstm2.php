@@ -169,7 +169,7 @@ if ($selectedUser) {
         <li><a href="setcoordinates.php">Set Coordinates</a></li>
         <li><a href="editcoordinates.php">Edit Coordinates</a></li>
         <li><a href="statisticalMapping.php">Statistics</a></li>
-        <li><a href="users.php">Users</a></li>
+        <li><a href="#">Users</a></li>
         <li><a href="lstm.php">Get Insights</a></li>
         <li><a href="registration.php">Logout</a></li>
     </ul>

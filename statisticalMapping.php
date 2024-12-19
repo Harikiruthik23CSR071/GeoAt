@@ -164,7 +164,7 @@ if ($avgSessionResult && $avgSessionResult->num_rows > 0) {
           <li><a href="setcoordinates.php"><i class="uil uil-map-marker"></i> Set Coordinates</a></li>
           <li><a href="editcoordinates.php"><i class="uil uil-map-marker"></i>Edit Coordinates</a></li>
           <li><a href="statisticalMapping.php"><i class="uil uil-chart"></i> Statistics</a></li>
-          <li><a href="#"><i class="uil uil-users-alt"></i> Users</a></li>
+          <li><a href="users.php"><i class="uil uil-users-alt"></i> Users</a></li>
           <li><a href="lstm.php"><i class="uil uil-setting"></i> Get Insights</a></li>
           <li><a href="registration.php"><i class="uil uil-signout"></i> Logout</a></li>
         </ul>

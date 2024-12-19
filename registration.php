@@ -35,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $_SESSION['email'] = $user['email'];
                 $_SESSION['session_start_time'] = date("Y-m-d H:i:s");
                 echo "<script>alert('Login Successful');
-                window.location.href='index.php';
+                window.location.href='rough.php';
                 </script>";
                 exit();
             } else {
@@ -252,7 +252,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <button type="submit" name="login">Login</button>
                     </div>
                     <div class="form-toggle">
-                        <p>Don't have an account? <a onclick="showSignUp()">Sign Up</a></p>
+                        <p>Have a Queries? <a onclick="#">Help</a></p>
                     </div>
                 </form>
             </div>

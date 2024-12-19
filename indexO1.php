@@ -36,7 +36,7 @@ session_start();
     <div class="container">
         <header>
             <img style="height: 150px;" src="Group 24.png" alt="Logo">
-            <h1>GeoLoc Attendance</h1>
+            <h1>GeoAt Attendance</h1>
             <button id="checkOutBtn" onclick="checkOut()" class="hidden">Check Out</button>
         </header>
 

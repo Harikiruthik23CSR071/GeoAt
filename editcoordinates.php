@@ -170,7 +170,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           <li><a href="setcoordinates.php"><i class="uil uil-map-marker"></i> Set Coordinates</a></li>
           <li><a href="editcoordinates.php"><i class="uil uil-map-marker"></i>Edit Coordinates</a></li>
           <li><a href="statisticalMapping.php"><i class="uil uil-chart"></i> Statistics</a></li>
-          <li><a href="#"><i class="uil uil-users-alt"></i> Users</a></li>
+          <li><a href="users.php"><i class="uil uil-users-alt"></i> Users</a></li>
           <li><a href="lstm.php"><i class="uil uil-setting"></i> Get Insights</a></li>
           <li><a href="registration.php"><i class="uil uil-signout"></i> Logout</a></li>
         </ul>
@@ -179,8 +179,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <div class="main-container">
   <center><h1>Coordinates Locker</h1></center>
   <?php if (!empty($successMessage)): ?>
-    <div class="alert alert-success"><?= $successMessage ?></div>
-  <?php endif; ?>
+    <div id="successMessage" class="alert alert-success"><?= $successMessage ?></div>
+    <script>
+        setTimeout(function() {
+            const successMessageElement = document.getElementById('successMessage');
+            if (successMessageElement) {
+                successMessageElement.style.transition = 'opacity 0.5s';
+                successMessageElement.style.opacity = '0';
+                setTimeout(() => successMessageElement.remove(), 500); // Removes the element after fading out
+            }
+        }, 3000); // 3 seconds delay
+    </script>
+<?php endif; ?>
+
 
   <?php if ($action === "edit" && $editUser): ?>
     <form method="POST">

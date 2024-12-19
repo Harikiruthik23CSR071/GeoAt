@@ -170,7 +170,7 @@ body {
           <li><a href="setcoordinates.php"><i class="uil uil-map-marker"></i> Set Coordinates</a></li>
           <li><a href="editcoordinates.php"><i class="uil uil-map-marker"></i>Edit Coordinates</a></li>
           <li><a href="statisticalMapping.php"><i class="uil uil-chart"></i> Statistics</a></li>
-          <li><a href="#"><i class="uil uil-users-alt"></i> Users</a></li>
+          <li><a href="users.php"><i class="uil uil-users-alt"></i> Users</a></li>
           <li><a href="lstm.php"><i class="uil uil-setting"></i> Get Insights</a></li>
           <li><a href="registration.php"><i class="uil uil-signout"></i> Logout</a></li>
         </ul>
@@ -179,10 +179,21 @@ body {
   <div class="card">
     <h1>Coordinates Locker</h1>
     <?php if (!empty($successMessage)): ?>
-      <div class="success-message">
+    <div class="success-message" id="successMessage">
         <?= $successMessage ?>
-      </div>
-    <?php endif; ?>
+    </div>
+    <script>
+        setTimeout(function() {
+            const successMessageElement = document.getElementById('successMessage');
+            if (successMessageElement) {
+                successMessageElement.style.transition = 'opacity 0.5s';
+                successMessageElement.style.opacity = '0';
+                setTimeout(() => successMessageElement.remove(), 500); // Removes the element after fading out
+            }
+        }, 3000); // 3 seconds delay
+    </script>
+<?php endif; ?>
+
     <form method="POST">
       <div class="mb-3">
         <label for="email" class="form-label">User Email</label>

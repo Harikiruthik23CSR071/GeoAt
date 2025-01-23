@@ -5,7 +5,7 @@ session_start();
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "dbgeo";
+$dbname = "dbgeoat";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 

@@ -6,8 +6,8 @@ header('Content-Type: application/json');
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "dbgeo";
-$port=3307;
+$dbname = "dbgeoat";
+$port=3306;
 
 // Create a database connection
 $conn = new mysqli($servername, $username, $password, $dbname,$port);

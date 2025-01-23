@@ -256,7 +256,7 @@ session_start();
         <h2>Session Records</h2>
         <div id="userRecords">
             <?php
-            $conn = new mysqli("localhost", "root", "", "dbgeo","3307");
+            $conn = new mysqli("localhost", "root", "", "dbgeoat");
 
             if ($conn->connect_error) {
                 die("Connection failed: " . $conn->connect_error);

@@ -9,7 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $host = "localhost";
     $dbusername = "root";
     $dbpassword = "";
-    $dbname = "dbgeo";
+    $dbname = "dbgeoat";
 
     $conn = new mysqli($host, $dbusername, $dbpassword, $dbname);
 

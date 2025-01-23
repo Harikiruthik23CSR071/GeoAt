@@ -6,8 +6,8 @@ session_start();
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "dbgeo";
-$port=3307;
+$dbname = "dbgeoat";
+$port=3306;
 
 $conn = new mysqli($servername, $username, $password, $dbname,$port);
 
@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['add_user'])) {
         $username = $conn->real_escape_string($_POST['username']);
         $email = $conn->real_escape_string($_POST['email']);
-        $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
+        $password = $conn->real_escape_string($_POST['password'],);
         $role = $conn->real_escape_string($_POST['role']);
 
         // Check for existing user
@@ -333,10 +333,7 @@ $usersResult = $conn->query($usersQuery);
 </div>
 
     <!-- Footer -->
-    <footer class="bg-dark text-white text-center py-3">
-        <p>&copy; 2024 GeoAt Admin Panel. All rights reserved.</p>
-        <p>Designed by <a href="#" class="text-warning">TechVentures</a></p>
-    </footer>
+    
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>

@@ -8,7 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $sessionEndTime = date('Y-m-d H:i:s', strtotime($_POST['sessionEndTime']));  // Convert string to valid MySQL datetime format
         $sessionDuration = $_POST['duration'];
 
-        $conn = new mysqli("localhost", "root", "", "dbgeo");
+        $conn = new mysqli("localhost", "root", "", "dbgeoat");
 
         if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);

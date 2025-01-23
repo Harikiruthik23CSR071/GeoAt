@@ -5,8 +5,8 @@ $servername = "localhost";
 $username = "root";
 $password = "";
 $dbname = "dbgeo";
-
-$conn = new mysqli($servername, $username, $password, $dbname);
+$port=3307;
+$conn = new mysqli($servername, $username, $password, $dbname,$port);
 
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
@@ -85,6 +85,46 @@ while ($row = $dayWiseResult->fetch_assoc()) {
     $totalDurations[] = $row['total_duration'];
 }
 }
+$resultData = null;
+
+if (isset($_GET['input_date']) && isset($_GET['start_time']) && isset($_GET['end_time'])) {
+    $inputDate = $conn->real_escape_string($_GET['input_date']);
+    $inputStartTime = $_GET['start_time'];
+    $inputEndTime = $_GET['end_time'];
+
+    // Convert the input date (in mm-dd-yyyy) to yyyy-mm-dd format
+    $dateObject = DateTime::createFromFormat('d-m-Y', $inputDate);
+
+    if ($dateObject) {
+        // If the date conversion was successful, format it
+        $formattedDate = $dateObject->format('Y-d-m');
+    } else {
+        // Handle the error (invalid date format or conversion failure)
+        die("Invalid date format. Please enter a date in mm-dd-yyyy format.");
+    }
+
+    // Convert 12-hour format to 24-hour format using PHP's DateTime object
+    $startTime24 = date("H:i:s", strtotime($inputStartTime));
+    $endTime24 = date("H:i:s", strtotime($inputEndTime));
+
+    // Query to fetch usernames and checkout_time within the specified date and time range
+    $query = "
+        SELECT 
+            username, 
+            session_start, 
+            checkout_time 
+        FROM 
+            user_sessions 
+        WHERE 
+            DATE(session_start) = '$formattedDate'
+            AND TIME(session_start) >= '$startTime24'
+            AND TIME(session_start) <= '$endTime24'
+        ORDER BY session_start
+    ";
+    
+    $resultData = $conn->query($query);
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -131,8 +171,22 @@ while ($row = $dayWiseResult->fetch_assoc()) {
         <i class="uil-estate fa-fw"></i><a href="#"> Dashboard</a>
       </li>
       <li class="">
-        <i class="uil-folder"></i><a href="#">Coordinates Locker</a>
+        <i class="uil-folder"></i><a href="setcoordinates.php">Set Coordinates</a>
       </li>
+      <li class="">
+        <i class="uil-folder"></i><a href="editcoordinates.php">Edit Coordinates</a>
+      </li>
+      <li class="">
+        <i class="uil-folder"></i><a href="statisticalMapping.php">Statistics</a>
+      </li>
+      <li class="">
+        <i class="uil-folder"></i><a href="users.php">Users</a>
+      </li> 
+      <li class="">
+        <i class="uil-folder"></i><a href="lstm.php">Get Insights</a>
+      <!-- </li> <li class="">
+        <i class="uil-folder"></i><a href="statisticalMapping.html">Settings</a>
+      </li> -->
     </ul>
   </aside>
   
@@ -147,7 +201,7 @@ while ($row = $dayWiseResult->fetch_assoc()) {
         </div>
         <div class="collapse navbar-collapse" id="toggle-navbar">
           <ul class="navbar-nav ms-auto">
-              <a style="text-decoration:none;color:white;" href="logingeo.php" id="navbarDropdown" role="button" aria-expanded="false">
+              <a style="text-decoration:none;color:white;" href="registration.php" id="navbarDropdown" role="button" aria-expanded="false">
                 LOGOUT
               </a>
           </ul>
@@ -254,7 +308,7 @@ while ($row = $dayWiseResult->fetch_assoc()) {
           </div>
           <div class="col-lg-6">
             <div class="chart-container rounded-2 p-3">
-              <h3 class="fs-6 mb-3">Chart title number two</h3>
+              <h3 class="fs-6 mb-3">Analytics</h3>
               <canvas id="myChart2"></canvas>
             </div>
           </div>
@@ -380,10 +434,62 @@ while ($row = $dayWiseResult->fetch_assoc()) {
           </div>
         </div>
       </section>
-  
       <section class="charts mt-4" id="tab">
         <div class="chart-container p-3" id="tab2">
-          <h3 class="fs-6 mb-3">Chart title number three</h3>
+          <h3 class="fs-6 mb-3">Time wise Monitoring</h3>
+            <form method="GET" action="">
+                <h3 class="fs-6 mb-3"><label>Enter Date (DD-MM-YYYY):</label></h3>
+                <input type="text" name="input_date" required placeholder="eg: 01-05-2024">
+                
+                <h3 class="fs-6 mb-3"><label>Enter Start Time (hh:mm am/pm):</label></h3>
+                <input type="text" name="start_time" required placeholder="eg: 03:00 am">
+                
+                <h3 class="fs-6 mb-3"><label>Enter End Time (hh:mm am/pm):</label></h3>
+                <input type="text" name="end_time" required placeholder="eg: 04:00 pm">
+                <button style="margin-left:30px;">
+                  <input type="submit" style="background:transparent;border:none;" value="FETCH">
+                    <div id="clip">
+                        <div id="leftTop" class="corner"></div>
+                        <div id="rightBottom" class="corner"></div>
+                        <div id="rightTop" class="corner"></div>
+                        <div id="leftBottom" class="corner"></div>
+                    </div>
+                    <span id="rightArrow" class="arrow"></span>
+                    <span id="leftArrow" class="arrow"></span>
+                </button>
+            </form><br>
+          <?php if ($resultData && $resultData->num_rows > 0): ?>
+            <h3>Users who checked in on <?php echo htmlspecialchars($inputDate); ?> between <?php echo htmlspecialchars($inputStartTime); ?> and <?php echo htmlspecialchars($inputEndTime); ?>:</h3>
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Checkin Time</th>
+                        <th>Checkout Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php while($row = $resultData->fetch_assoc()): ?>
+                        <tr>
+                            <td><?php echo htmlspecialchars($row['username']); ?></td>
+                            <td><?php echo htmlspecialchars($row['session_start']); ?></td>
+                            <td><?php echo htmlspecialchars($row['checkout_time']); ?></td>
+                        </tr>
+                    <?php endwhile; ?>
+                </tbody>
+            </table>
+          <?php elseif (isset($inputDate)): ?>
+              <p style=color:red;>No data found for the specified date and time range.</p>
+          <?php endif; ?>
+          <div style="height: 300px">
+            <canvas id="chart3" width="100%">
+            </canvas>
+          </div>
+        </div>
+      </section>
+      <section class="charts mt-4" id="tab">
+        <div class="chart-container p-3" id="tab2">
+          <h3 class="fs-6 mb-3">User History</h3>
           <?php if ($singleUserResult && $singleUserResult->num_rows > 0): ?>
             <h3>Day-wise Check-in Data for User: <?php echo htmlspecialchars($inputUsername); ?></h3>
             <table border="1">
@@ -409,7 +515,7 @@ while ($row = $dayWiseResult->fetch_assoc()) {
                 </tbody>
             </table>
             <?php elseif (isset($inputUsername)): ?>
-                <p>No data found for user: <?php echo htmlspecialchars($inputUsername); ?></p>
+                <p style=color:red;>No data found for user: <?php echo htmlspecialchars($inputUsername); ?></p>
             <?php endif; ?>
           <div style="height: 300px">
             <canvas id="chart3" width="100%">

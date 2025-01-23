@@ -14,9 +14,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             die("Connection failed: " . $conn->connect_error);
         }
 
+        // Store the session data
         $stmt = $conn->prepare("INSERT INTO user_sessions (username, session_start, session_end, session_duration, checkout_time) VALUES (?, ?, ?, ?, NOW())");
         $stmt->bind_param("ssss", $username, $sessionStartTime, $sessionEndTime, $sessionDuration);
-        $stmt->execute();
+        if ($stmt->execute()) {
+            echo "Session data stored successfully!";
+        } else {
+            echo "Error: " . $stmt->error;
+        }
         $stmt->close();
         $conn->close();
     } else {

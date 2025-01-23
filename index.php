@@ -9,6 +9,7 @@ session_start();
     <title>GeoLoc Attendance</title>
     <link rel ="stylesheet" href="index.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- // Google API key to get real time location data -->
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQ-JTbsBf1D6yayoW3mGvNHo0aJja6ZFE&libraries=places"></script>
 </head>
 <body>
@@ -17,7 +18,7 @@ session_start();
     <nav class="navbar">
         <img src="Group 34056.png" alt="Logo">
         <ul>
-            <li><a href="#">About</a></li>
+            <li><a href="#">About Us</a></li>
             <li><a href="#">Services</a></li>
             <li><a href="#">Contact Us</a></li>
             <li><a href="#">News</a></li>
@@ -31,7 +32,7 @@ session_start();
                  <?php endif; ?>
             </span>
         </div>
-       <a href="logingeo.php" style="list-style-type: none;"> <button style='font-size:18px '>Logout <i class='fas fa-power-off'> </i></button></a>
+       <a href="registration.php" style="list-style-type: none;"> <button style='font-size:18px '>Logout <i class='fas fa-power-off'> </i></button></a>
     </nav>
     <div class="container">
         <header>
@@ -114,7 +115,7 @@ session_start();
         console.log(`Top Left corner: ${geoFence.topLeft.latitude}, ${geoFence.topLeft.longitude}`);
         console.log(`Bottom Right corner: ${geoFence.bottomRight.latitude}, ${geoFence.bottomRight.longitude}`);
 
-        // Proceed with check-in regardless of location
+        // Proceed with check-in  of location
         document.getElementById('userSection').classList.remove('hidden');
         document.getElementById('checkOutBtn').classList.remove('hidden');
         document.getElementById('checkInBtn').classList.add('hidden');

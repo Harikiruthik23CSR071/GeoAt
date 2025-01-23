@@ -7,9 +7,10 @@ $servername = "localhost";
 $username = "root";
 $password = "";
 $dbname = "dbgeo";
+$port=3307;
 
 // Create a database connection
-$conn = new mysqli($servername, $username, $password, $dbname);
+$conn = new mysqli($servername, $username, $password, $dbname,$port);
 
 // Check if the connection is successful
 if ($conn->connect_error) {

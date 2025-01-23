@@ -5,8 +5,9 @@ $host = "localhost";
 $dbusername = "root";
 $dbpassword = "";
 $dbname = "dbgeo";
+$port=3307;
 
-$conn = new mysqli($host, $dbusername, $dbpassword, $dbname);
+$conn = new mysqli($host, $dbusername, $dbpassword, $dbname,$port);
 
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);

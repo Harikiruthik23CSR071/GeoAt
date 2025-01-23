@@ -5,8 +5,8 @@ $servername = "localhost";
 $username = "root";
 $password = "";
 $dbname = "dbgeo";
-
-$conn = new mysqli($servername, $username, $password, $dbname);
+$port=3307;
+$conn = new mysqli($servername, $username, $password, $dbname,$port);
 
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
@@ -180,13 +180,13 @@ if (isset($_GET['input_date']) && isset($_GET['start_time']) && isset($_GET['end
         <i class="uil-folder"></i><a href="statisticalMapping.php">Statistics</a>
       </li>
       <li class="">
-        <i class="uil-folder"></i><a href="statisticalMapping.html">Users</a>
+        <i class="uil-folder"></i><a href="users.php">Users</a>
       </li> 
       <li class="">
         <i class="uil-folder"></i><a href="lstm.php">Get Insights</a>
-      </li> <li class="">
+      <!-- </li> <li class="">
         <i class="uil-folder"></i><a href="statisticalMapping.html">Settings</a>
-      </li>
+      </li> -->
     </ul>
   </aside>
   

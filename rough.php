@@ -11,29 +11,142 @@ session_start();
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!-- // Google API key to get real time location data -->
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQ-JTbsBf1D6yayoW3mGvNHo0aJja6ZFE&libraries=places"></script>
+    <style> body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        thead {
+            background-color: #007bff;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        section {
+            padding: 20px;
+            margin: 20px 0;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+        }
+
+        h2 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        ul li {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        ul li::before {
+            
+            position: absolute;
+            left: 0;
+            color: #28a745;
+            font-size: 16px;
+        }
+
+        .two-columns {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .two-columns > div {
+            flex: 1;
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .social-media {
+            margin-top: 10px;
+        }
+
+        .social-media a {
+            margin-right: 10px;
+            text-decoration: none;
+            font-size: 20px;
+            color: #333;
+            transition: color 0.3s;
+        }
+
+        .social-media a:hover {
+            color: #007bff;
+        }
+
+        .records-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .records-table thead {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .records-table th, .records-table td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .records-table tbody tr:hover {
+            background-color: #f1f1f1;
+        }
+
+       
+
+</style>
 </head>
 <body>
 
-   
-    <nav class="navbar">
+<nav class="navbar">
         <img src="Group 34056.png" alt="Logo">
         <ul>
-            <li><a href="#">About Us</a></li>
-            <li><a href="#">Services</a></li>
-            <li><a href="#">Contact Us</a></li>
-            <li><a href="#">News</a></li>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#contacts">Contact Us</a></li>
+            <li><a href="#news">News</a></li>
+            <li><a href="#records">Records</a></li>
         </ul>
-        <div class="profile"><img src="Profile-PNG-File.png" alt="profile">
+        <div class="profile">
+            <img src="Profile-PNG-File.png" alt="profile">
             <span>
                 <?php if (isset($_SESSION['username'])): ?>
                 <p><?php echo $_SESSION['username']; ?>!</p>
-                 <?php else: ?>
-                   <p>Welcome!</p>
-                 <?php endif; ?>
+                <?php else: ?>
+                <p>Welcome!</p>
+                <?php endif; ?>
             </span>
         </div>
-       <a href="registration.php" style="list-style-type: none;"> <button style='font-size:18px '>Logout <i class='fas fa-power-off'> </i></button></a>
+        <button  style="font-size: 18px; cursor: pointer;" onclick="logout()"> Logout <i class="fas fa-power-off"></i></button>
+
+<script>
+    function logout() {
+        // Redirect the user to the registration.php page
+        window.location.href = "registration.php";
+    }
+</script>
     </nav>
+
     <div class="container">
         <header>
             <img style="height: 150px;" src="Group 34056.png" alt="Logo">
@@ -43,7 +156,7 @@ session_start();
         <section id="userSection" class="hidden">
         <div id="userCard">
             <div class="user-avatar">
-                <img src="Profile-PNG-File.png" alt="User Avatar">
+                <img src="employee.png" alt="User Avatar">
             </div>
             <div class="user-info">
                 <h2 id="userName">
@@ -73,7 +186,7 @@ session_start();
 
 
         <section id="actions">
-            <button id="checkInBtn" onclick="checkIn()">Check In</button>
+        <button id="checkInBtn" onclick="checkIn()">Check In</button>
             <button id="checkOutBtn" onclick="checkOut()" class="hidden">Check Out</button>
             <button style="display:none" id="notEmployeeBtn" onclick="notAnEmployee()">Contact Admin</button>
         </section>
@@ -84,12 +197,113 @@ session_start();
             <p><i class="fas fa-phone-alt"></i> Helpline: <a href="tel:+1-234-567-890">+91 9342696026</a></p>
         </section>
 
-        <footer>
+        <footer class="footer1">
             <p>&copy; 2024 GeoAt Attendance</p>
             <a href="#" style="list-style-type: none;">Terms & conditions</a>
         </footer>
     </div>
-    <script>
+    <section id="about">
+        <h2>About Us</h2>
+        <p>
+            Welcome to <strong>GeoAt Attendance</strong>, your trusted platform for seamless geolocation-based attendance
+            tracking. Our system is designed to enhance productivity, ensure accountability, and simplify workforce
+            management.
+        </p>
+        <p>
+            With cutting-edge features like real-time tracking, session analytics, and detailed reporting, we aim to
+            revolutionize how you manage attendance in your organization.
+        </p>
+    </section>
+
+    <div class="two-columns">
+        <section id="services">
+            <h2>Our Services</h2>
+            <ul>
+                <li>Real-time attendance tracking with geolocation precision.</li>
+                <li>Customizable session management for flexible work policies.</li>
+                <li>Insightful analytics and reporting to optimize your team's performance.</li>
+                <li>Secure data storage ensuring compliance and privacy.</li>
+            </ul>
+        </section>
+
+        <section id="contacts">
+            <h2>Contact Us</h2>
+            <p>We’re here to help! Reach out to us anytime:</p>
+            <div class="contact-details">
+                <p><i class="fas fa-user-shield"></i> Admin: <a href="mailto:admin@geoat.com">admin@geoat.com</a></p>
+                <p><i class="fas fa-phone-alt"></i> Helpline: <a href="tel:+91-9342696026">+91 9342696026</a></p>
+                <div class="social-media">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <section id="news">
+        <h2>Latest News</h2>
+        <p>Stay updated with our exciting features and announcements!</p>
+        <ul>
+            <li>Upcoming feature: Automated break time tracking and reminders.</li>
+            <li>New partnership with global HR platforms for seamless integration.</li>
+            <li>Free webinar: "Enhancing Workforce Management with GeoAt Attendance."</li>
+        </ul>
+    </section>
+
+    <section id="records">
+        <h2>Session Records</h2>
+        <div id="userRecords">
+            <?php
+            $conn = new mysqli("localhost", "root", "", "dbgeo","3307");
+
+            if ($conn->connect_error) {
+                die("Connection failed: " . $conn->connect_error);
+            }
+
+            $username = isset($_SESSION['username']) ? $_SESSION['username'] : '';
+            $sql = "SELECT session_start, session_end, session_duration FROM user_sessions WHERE username = ?";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("s", $username);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            if ($result->num_rows > 0) {
+                echo "<table class='records-table'>
+                        <thead>
+                            <tr>
+                                <th>Session Start</th>
+                                <th>Session End</th>
+                                <th>Session Duration</th>
+                            </tr>
+                        </thead>
+                        <tbody>";
+                while ($row = $result->fetch_assoc()) {
+                    echo "<tr>
+                            <td>{$row['session_start']}</td>
+                            <td>{$row['session_end']}</td>
+                            <td>{$row['session_duration']}</td>
+                          </tr>";
+                }
+                echo "</tbody>
+                    </table>";
+            } else {
+                echo "<p>No records found.</p>";
+            }
+
+            $stmt->close();
+            $conn->close();
+            ?>
+        </div>
+    </section>
+
+   
+</section>
+
+   </section>
+</body>
+<script>
     // Coordinates for the rectangular geofenced area (set by admin)
     const geoFence = {}; // Geofence will be dynamically fetched from the database
 
@@ -170,6 +384,7 @@ function validatePosition(position) {
         document.getElementById('location').innerText = `Lat: ${latitude}, Lon: ${longitude}`;
     } else {
         alert("You are outside the allowed location. Please move within the designated area to check in.");
+        
     }
 }
 
@@ -241,5 +456,14 @@ function showError(error) {
 }
 
 </script>
-</body>
+<script>document.querySelectorAll('.navbar a').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href').substring(1);
+        document.getElementById(targetId).scrollIntoView({
+            behavior: 'smooth'
+        });
+    });
+});
+</script>
 </html>
